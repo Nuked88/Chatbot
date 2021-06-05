@@ -5,8 +5,7 @@ import numpy as np
 
 nlp = spacy.load('en')
 
-data_path = '/home/nirvan/workarea/chatbot/src/FinanceBot/basic_bot/data/intent_classes/'
-#data_path = '/data/intent_classes/'
+data_path = 'data/intent_classes/'
 
 
 #list of filenames after removing the extensions.
