@@ -44,7 +44,7 @@ To run this,
 
 1. Train the model on the intents. Go to basic_bot and do ```python intent_train.py``` . This will train the model on the intents mentioned in ```data/intent_classes``` . Every text file is of one intent. Every file has a collection of statements on which that intent is trained. The filename is the intent label.
 
-2. Run ```python intent_predict2.py``` . Enter any text as a command line argument. If the text entered is relevant to any of the intents on which it is trained, it will reply with the answer to that intent.  
+2. Run ```python intent_predict.py``` . Enter any text. If the text entered is relevant to any of the intents on which it is trained, it will reply with the answer to that intent.  
  
 ## Adding more intents
 
