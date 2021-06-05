@@ -1,7 +1,7 @@
 from preprocessor import Dataset, pad_vec_sequences, labels, pad_class_sequence
 from sklearn import preprocessing, model_selection
 import numpy as np
-
+import keras
 from keras.preprocessing import sequence
 from keras.models import Model
 from keras.layers import Dense, Dropout, Embedding, Input, merge
@@ -28,13 +28,13 @@ y_train = pad_class_sequence(y_train, nb_classes)
 y_test = pad_class_sequence(y_test, nb_classes)
  
 #THE MODEL
-sequence = Input(shape=(maxlen,384), dtype='float32', name='input')
+sequence = Input(shape=(maxlen,96), dtype='float32', name='input')
 #forwards lstm
 forwards = LSTM(hidden_dim, activation='tanh', recurrent_activation='hard_sigmoid', use_bias=True, dropout=0.1, recurrent_dropout=0.1)(sequence)
 #backwards lstm
 backwards = LSTM(hidden_dim, activation='tanh', recurrent_activation='hard_sigmoid', use_bias=True, dropout=0.1, recurrent_dropout=0.1, go_backwards=True)(sequence)
 #forwards + backwards = bidirectional lstm
-merged = merge([forwards, backwards])
+merged = keras.layers.concatenate([forwards, backwards])
 #dropout layer applied to prevent overfitting
 after_dp = Dropout(0.6)(merged)
 #softmax activation layer
@@ -61,8 +61,13 @@ x_train.ravel()
 y_train = np.asarray(y_train)
 y_train.ravel()
 
+x_test_np = np.asarray(x_test)
+y_test_np = np.asarray(y_test)
+
 print("Fitting to model")
-my_model = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epoch, validation_data=[x_test, y_test])
+
+
+my_model = model.fit(x_train, y_train, batch_size=batch_size, epochs=num_epoch, validation_data=(x_test_np, y_test_np))
 
 print("Model Training complete.")
 
