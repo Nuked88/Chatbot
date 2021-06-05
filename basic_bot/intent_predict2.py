@@ -57,7 +57,7 @@ about_weather_ans = "I'll have to check with the weather man"
 nb_classes = len(labels)
 
 #load the model to be tested.
-model = load_model('/home/nirvan/workarea/chatbot/src/FinanceBot/basic_bot/backup/intent_models/model2.h5')
+model = load_model('backup/intent_models/model2.h5')
 
 n_test = 1
 test_vec_seq = [] #list of all vectorized test queries
